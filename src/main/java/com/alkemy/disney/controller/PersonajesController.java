@@ -30,26 +30,26 @@ public class PersonajesController {
     private ServicioPersonaje servicioPersonaje;
 
     @GetMapping()
-    public Iterable<Object[]> getAll(){
+    public Iterable<Object[]> obtenerTodos(){
         return servicioPersonaje.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Personaje> findById(@PathVariable("id") String personajeId){
+    public Optional<Personaje> buscarPorId(@PathVariable("id") String personajeId){
         return servicioPersonaje.findById(personajeId);
     }
     
     @GetMapping(params="name")
-    public Iterable<Object[]> findByName(@RequestParam("name") String name){
+    public Iterable<Object[]> buscarPorNombre(@RequestParam("name") String name){
         return servicioPersonaje.findByName(name);
     }
     
     @GetMapping(params="age")
-    public Iterable<Object[]> findByAge(@RequestParam("age") Integer age){
+    public Iterable<Object[]> buscarPorEdad(@RequestParam("age") Integer age){
         return servicioPersonaje.findByAge(age);
     }
     @DeleteMapping(path = "delete/{id}")
-    public String delete(@PathVariable("id") String id){
+    public String eliminar(@PathVariable("id") String id){
         try {
             servicioPersonaje.delete(id);
             return "Personaje eliminado correctamente: " + id;
@@ -59,7 +59,7 @@ public class PersonajesController {
     }
     
     @PostMapping("save")
-    public Personaje save(@RequestParam("file") MultipartFile image, @ModelAttribute Personaje personaje){
+    public Personaje guardar(@RequestParam("file") MultipartFile image, @ModelAttribute Personaje personaje){
         if(!image.isEmpty()){
             Path imagesPath = Paths.get("src//main//resources//static//images");
             String absolutPath = imagesPath.toFile().getAbsolutePath();

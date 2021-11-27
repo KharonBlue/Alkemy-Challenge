@@ -22,12 +22,12 @@ public class RegistroController {
     private final RegistroServicio registroServicio;
 
     @PostMapping
-    public String register(@RequestBody RegistroRequest request) {
+    public String registrar(@RequestBody RegistroRequest request) {
         return registroServicio.registro(request);
     }
 
     @GetMapping(path = "confirm")
-    public String confirm(@RequestParam("token") String token) {
+    public String confirmarToken(@RequestParam("token") String token) {
         return registroServicio.confirmarToken(token);
     }
 }

@@ -1,4 +1,3 @@
-
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.entity.Pelicula;
@@ -36,30 +35,30 @@ public class PeliculaController {
 
 
     @GetMapping()
-    public Iterable<Object[]> getAll(){
+    public Iterable<Object[]> obtenerTodos(){
         return servicioPeliculas.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Pelicula> findById(@PathVariable("id") String id){
+    public Optional<Pelicula> bucarPorId(@PathVariable("id") String id){
         return servicioPeliculas.findById(id);
     }
     
     @GetMapping(params="name")
-    public Iterable<Object[]> findByTitle(@RequestParam("name") String title){
+    public Iterable<Object[]> buscarPorTitulo(@RequestParam("name") String title){
         return servicioPeliculas.findByTitulo(title);
     }
     @GetMapping(params="order")
-    public Iterable<Object[]> getByOrder(@RequestParam("order") String order){
+    public Iterable<Object[]> OrderBy(@RequestParam("order") String order){
         return servicioPeliculas.getByOrder(order);
     }
     @GetMapping(value = "", params="genreId")
-    public List<Pelicula> getByGenre(@RequestParam("genreId") String generoId){
+    public List<Pelicula> obtenerPorGenero(@RequestParam("genreId") String generoId){
         return servicioGenero.getMoviesByGenreId(generoId);
     }
     
     @DeleteMapping(path = "delete/{id}")
-    public String delete(@PathVariable("id") String id){
+    public String eliminar(@PathVariable("id") String id){
         try {
             servicioPeliculas.delete(id);
             return "Pelicula borrada: " + id;
@@ -69,7 +68,7 @@ public class PeliculaController {
     }
 
     @PostMapping("save")
-    public Pelicula save(@RequestParam("file") MultipartFile image, @ModelAttribute Pelicula pelicula){
+    public Pelicula guardar(@RequestParam("file") MultipartFile image, @ModelAttribute Pelicula pelicula){
         if(!image.isEmpty()){
             Path imagesPath = Paths.get("src//main//resources//static//images");
             String absolutPath = imagesPath.toFile().getAbsolutePath();
